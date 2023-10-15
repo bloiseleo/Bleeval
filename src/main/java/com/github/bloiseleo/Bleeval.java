@@ -1,5 +1,6 @@
 package com.github.bloiseleo;
 
+import com.github.bloiseleo.Operators.MinusOperator;
 import com.github.bloiseleo.Operators.Operator;
 import com.github.bloiseleo.Operators.PlusOperator;
 
@@ -15,6 +16,7 @@ public class Bleeval {
     private final HashMap<Character, Operator> operatorHashMap = new HashMap<>();
     {
         operatorHashMap.put('+', new PlusOperator());
+        operatorHashMap.put('-', new MinusOperator());
     }
     public Bleeval(String expression) {
         this.expression = expression;
@@ -46,33 +48,36 @@ public class Bleeval {
     private boolean isOperator(char c) {
         return  operatorHashMap.containsKey(c);
     }
-    private int consume(Stack<Operator> operators, Stack<Integer> operands) {
+    private int consume(ArrayList<Operator> operators, ArrayList<Integer> operands) {
+
         while (!operators.isEmpty()) {
-            Operator op = operators.pop();
-            int y = operands.pop();
-            int x = operands.pop();
-            operands.push(op.execute(x, y));
+            Operator op = operators.remove(0);
+            int x = operands.remove(0);
+            int y = operands.remove(0);
+            operands.add(0, op.execute(x, y));
         }
-        return operands.pop();
+        return operands.remove(0);
     }
     public int evaluate() {
         int i = 0;
-        Stack<Operator> operators = new Stack<>();
-        Stack<Integer> numbers = new Stack<>();
+        ArrayList<Operator> operators = new ArrayList<>();
+        ArrayList<Integer> numbers = new ArrayList<>();
         int qtdChars = expression.length();
         while (i < qtdChars) {
             char c = expression.charAt(i);
             if (isDigit(c)) {
                 int number = number(i);
-                numbers.push(number);
+                numbers.add(number);
                 i++;
                 continue;
             }
             if (isOperator(c)) {
                 Operator op = operatorHashMap.get(c);
-                operators.push(op);
+                operators.add(op);
                 i++;
+                continue;
             }
+            throw new RuntimeException(String.format("Unexpected token '%c' at %d", c, i));
         }
         return consume(operators, numbers);
     }
