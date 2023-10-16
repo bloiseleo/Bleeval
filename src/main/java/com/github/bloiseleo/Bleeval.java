@@ -77,7 +77,7 @@ public class Bleeval {
                     if (lop != null && lop.compareTo(op) < 0) { // If last operator inserted has less precedence
                         char c1 = next();
                         if (!isDigit(c1)) {
-                            throw new RuntimeException("After a multiply operator, must have a number");
+                            throw new RuntimeException("After an operator, must have an operand");
                         }
                         int nextNumber = number();
                         int previousNumber = numbers.remove(numbers.size() - 1);
