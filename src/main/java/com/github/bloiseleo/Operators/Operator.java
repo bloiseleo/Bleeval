@@ -1,7 +1,7 @@
 package com.github.bloiseleo.Operators;
 
 public abstract class Operator implements Comparable<Operator> {
-    private int precedence;
+    private final int precedence;
     public Operator(int precedence) {
         this.precedence = precedence;
     }
