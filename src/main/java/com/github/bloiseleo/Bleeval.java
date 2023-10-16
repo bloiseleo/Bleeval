@@ -6,7 +6,6 @@ import com.github.bloiseleo.Operators.PlusOperator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,9 +20,6 @@ public class Bleeval {
     }
     public Bleeval(String expression) {
         this.expression = expression;
-    }
-    public String getExpression() {
-        return expression;
     }
     public void setExpression(String expression) {
         this.expression = expression;
