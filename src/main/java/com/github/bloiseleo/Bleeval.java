@@ -1,8 +1,10 @@
 package com.github.bloiseleo;
 
 import com.github.bloiseleo.Operators.MinusOperator;
+import com.github.bloiseleo.Operators.MultiplyOperator;
 import com.github.bloiseleo.Operators.Operator;
 import com.github.bloiseleo.Operators.PlusOperator;
+import com.sun.jdi.PrimitiveValue;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +19,7 @@ public class Bleeval {
     {
         operatorHashMap.put('+', new PlusOperator());
         operatorHashMap.put('-', new MinusOperator());
+        operatorHashMap.put('*', new MultiplyOperator());
     }
     public Bleeval(String expression) {
         this.expression = expression;
@@ -28,18 +31,14 @@ public class Bleeval {
         Matcher matcher = digitPattern.matcher(String.valueOf(c));
         return matcher.find();
     }
-    private char peek(int pos) {
-        if(pos >= expression.length()) {
-            return 0;
-        }
-        return expression.charAt(pos);
+    private char peek() {
+        return expression.charAt(curr);
     }
     private int number() {
         StringBuilder number = new StringBuilder();
         do {
             number.append(expression.charAt(curr));
-            curr++;
-        } while(isDigit(peek(curr)));
+        } while(isDigit(next()));
         return Integer.valueOf(number.toString(), 10);
     }
     private boolean isOperator(char c) {
@@ -54,12 +53,19 @@ public class Bleeval {
         }
         return operands.remove(0);
     }
+    private char next() {
+        curr++;
+        if(curr >= expression.length()) {
+            return 0;
+        }
+        return expression.charAt(curr);
+    }
     public int evaluate() {
         ArrayList<Operator> operators = new ArrayList<>();
         ArrayList<Integer> numbers = new ArrayList<>();
         int qtdChars = expression.length();
         while (curr < qtdChars) {
-            char c = expression.charAt(curr);
+            char c = peek();
             if (isDigit(c)) {
                 int number = number();
                 numbers.add(number);
@@ -67,6 +73,20 @@ public class Bleeval {
             }
             if (isOperator(c)) {
                 Operator op = operatorHashMap.get(c);
+                if (!operators.isEmpty()) {
+                    Operator lop = operators.get(operators.size() - 1); // Last Operator inserted
+                    if (lop != null && lop.compareTo(op) < 0) { // If last operator inserted has less precedence
+                        char c1 = next();
+                        if (!isDigit(c1)) {
+                            throw new RuntimeException("After a multiply operator, must have a number");
+                        }
+                        int nextNumber = number();
+                        int previousNumber = numbers.remove(numbers.size() - 1);
+                        int result = op.execute(previousNumber, nextNumber);
+                        numbers.add(result);
+                        continue;
+                    }
+                }
                 operators.add(op);
                 if (curr == 0) {
                     numbers.add(0);

@@ -25,4 +25,21 @@ public class BleevalTest {
         bleeval.setExpression("-1-1-1-1");
         Assertions.assertEquals(-4, bleeval.evaluate());
     }
+    @Test
+    public void test_correct_multiply() {
+        Bleeval bleeval = new Bleeval("2*2");
+        Assertions.assertEquals(4, bleeval.evaluate());
+        bleeval.setExpression("2*2+1");
+        Assertions.assertEquals(5, bleeval.evaluate());
+        bleeval.setExpression("1+2*2");
+        Assertions.assertEquals(5, bleeval.evaluate());
+        bleeval.setExpression("2+2*2");
+        Assertions.assertEquals(6, bleeval.evaluate());
+        bleeval.setExpression("2*2+1+2*2");
+        Assertions.assertEquals(9, bleeval.evaluate());
+        bleeval.setExpression("2*2+1-2*2");
+        Assertions.assertEquals(1, bleeval.evaluate());
+        bleeval.setExpression("-2*2+1-2*2");
+        Assertions.assertEquals(-7, bleeval.evaluate());
+    }
 }
