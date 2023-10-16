@@ -11,6 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Bleeval {
+    private int curr = 0;
     private String expression;
     private final Pattern digitPattern = Pattern.compile("^\\d+$");
     private final HashMap<Character, Operator> operatorHashMap = new HashMap<>();
@@ -37,19 +38,18 @@ public class Bleeval {
         }
         return expression.charAt(pos);
     }
-    private int number(int start) {
+    private int number() {
         StringBuilder number = new StringBuilder();
         do {
-            number.append(expression.charAt(start));
-            start++;
-        } while(isDigit(peek(start)));
+            number.append(expression.charAt(curr));
+            curr++;
+        } while(isDigit(peek(curr)));
         return Integer.valueOf(number.toString(), 10);
     }
     private boolean isOperator(char c) {
         return  operatorHashMap.containsKey(c);
     }
     private int consume(ArrayList<Operator> operators, ArrayList<Integer> operands) {
-
         while (!operators.isEmpty()) {
             Operator op = operators.remove(0);
             int x = operands.remove(0);
@@ -59,26 +59,31 @@ public class Bleeval {
         return operands.remove(0);
     }
     public int evaluate() {
-        int i = 0;
         ArrayList<Operator> operators = new ArrayList<>();
         ArrayList<Integer> numbers = new ArrayList<>();
         int qtdChars = expression.length();
-        while (i < qtdChars) {
-            char c = expression.charAt(i);
+        while (curr < qtdChars) {
+            char c = expression.charAt(curr);
             if (isDigit(c)) {
-                int number = number(i);
+                int number = number();
                 numbers.add(number);
-                i++;
                 continue;
             }
             if (isOperator(c)) {
                 Operator op = operatorHashMap.get(c);
                 operators.add(op);
-                i++;
+                if (curr == 0) {
+                    numbers.add(0);
+                }
+                curr++;
                 continue;
             }
-            throw new RuntimeException(String.format("Unexpected token '%c' at %d", c, i));
+            throw new RuntimeException(String.format("Unexpected token '%c' at %d", c, curr));
         }
+        reset();
         return consume(operators, numbers);
+    }
+    private void reset() {
+        curr = 0;
     }
 }

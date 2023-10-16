@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e93f8c78-0ba0-405d-be2e-03a428fc4f2c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="e93f8c78-0ba0-405d-be2e-03a428fc4f2c" name="Changes" comment="feat: adding minus operation, stil need to work on negative numbers">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/bloiseleo/Bleeval.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/bloiseleo/Bleeval.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BleevalTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BleevalTest.java" afterDir="false" />
@@ -64,6 +63,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="BleevalTest.test_correct_sum" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Bleeval" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BleevalTest" />
+      <option name="METHOD_NAME" value="test_correct_sum" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="BleevalTest.test_result" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Bleeval" />
       <option name="PACKAGE_NAME" value="" />
@@ -77,6 +86,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.BleevalTest" />
+        <item itemvalue="JUnit.BleevalTest.test_correct_sum" />
         <item itemvalue="JUnit.BleevalTest.test_correct_difference" />
         <item itemvalue="JUnit.BleevalTest.test_result" />
       </list>
@@ -91,6 +101,27 @@
       <option name="presentableId" value="Default" />
       <updated>1697316976749</updated>
     </task>
+    <task id="LOCAL-00001" summary="feat: adding minus operation, stil need to work on negative numbers">
+      <option name="closed" value="true" />
+      <created>1697401656553</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1697401656553</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat: adding minus operation, stil need to work on negative numbers">
+      <option name="closed" value="true" />
+      <created>1697401677726</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1697401677726</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: adding minus operation, stil need to work on negative numbers" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: adding minus operation, stil need to work on negative numbers" />
   </component>
 </project>

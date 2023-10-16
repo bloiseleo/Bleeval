@@ -20,5 +20,9 @@ public class BleevalTest {
         Assertions.assertEquals(2, bleeval.evaluate());
         bleeval.setExpression("-1+3-2+2-2");
         Assertions.assertEquals(0, bleeval.evaluate());
+        bleeval.setExpression("212-1+3-2+2-2");
+        Assertions.assertEquals(212, bleeval.evaluate());
+        bleeval.setExpression("-1-1-1-1");
+        Assertions.assertEquals(-4, bleeval.evaluate());
     }
 }
