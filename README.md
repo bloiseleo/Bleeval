@@ -1,6 +1,6 @@
-# Bleeval
+# Bleeval 🧮
 
-Bleeval aims to be a math expression string evaluator.
+Bleeval is a java math expression string evaluator.
 
 ## Possible Operations
 - [x] Sum of two integers.
@@ -8,3 +8,8 @@ Bleeval aims to be a math expression string evaluator.
 - [x] Multiply two numbers.
 - [ ] Division between two numbers.
 - [ ] Power.
+
+## Warnings ⚠️
+- Operators at the beginning of an expression are valid. The evaluator will consider that 0 is the first number in expression.
+- Bleeval supports precedence out of the box, but parenthesis are not supported(yet).
+- Bleeval does not support real numbers (yet).
