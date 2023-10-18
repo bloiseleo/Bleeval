@@ -16,29 +16,3 @@ jobs:
           java-version: '17'
       - name: Test the Library
         run: mvn --batch-mode test
-  build:
-    needs:
-      - test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-      - name: Create the Library JAR
-        run: mvn --batch-mode package
-      - name: Get Latest Tag
-        id: get_latest_tag
-        run: echo ::set-output name=tag::$(git describe --abbrev=0 --tags)
-      - name: Increment Version
-        id: increment_version
-        run: echo ::set-output name=incremented_tag::$(php -r '$version = explode(".", "${{ steps.get_latest_tag.outputs.tag }}"); $version[count($version) - 1]++; echo implode(".", $version);')
-      - name: Create Release
-        id: create_release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            target/Bleeval-1.0-SNAPSHOT.jar
-          tag_name: ${{ steps.increment_version.outputs.incremented_tag }}
-          title: Release ${{ steps.increment_version.outputs.incremented_tag }}
