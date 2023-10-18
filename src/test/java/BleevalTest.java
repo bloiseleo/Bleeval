@@ -42,4 +42,19 @@ public class BleevalTest {
         bleeval.setExpression("-2*2+1-2*2");
         Assertions.assertEquals(-7, bleeval.evaluate());
     }
+    @Test
+    public void test_correct_division() {
+        Bleeval bleeval = new Bleeval("2/2");
+        Assertions.assertEquals(1, bleeval.evaluate());
+        bleeval.setExpression("2/2*1");
+        Assertions.assertEquals(1, bleeval.evaluate());
+        bleeval.setExpression("1*2/2");
+        Assertions.assertEquals(1, bleeval.evaluate());
+        bleeval.setExpression("1+1*2/2");
+        Assertions.assertEquals(2, bleeval.evaluate());
+        bleeval.setExpression("-1+1*2/2");
+        Assertions.assertEquals(0, bleeval.evaluate());
+        bleeval.setExpression("10*2+20/10");
+        Assertions.assertEquals(22, bleeval.evaluate());
+    }
 }

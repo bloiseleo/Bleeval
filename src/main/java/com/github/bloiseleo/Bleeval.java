@@ -1,9 +1,6 @@
 package com.github.bloiseleo;
 
-import com.github.bloiseleo.Operators.MinusOperator;
-import com.github.bloiseleo.Operators.MultiplyOperator;
-import com.github.bloiseleo.Operators.Operator;
-import com.github.bloiseleo.Operators.PlusOperator;
+import com.github.bloiseleo.Operators.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +16,7 @@ public class Bleeval {
         operatorHashMap.put('+', new PlusOperator());
         operatorHashMap.put('-', new MinusOperator());
         operatorHashMap.put('*', new MultiplyOperator());
+        operatorHashMap.put('/', new DivisionOperator());
     }
     public Bleeval(String expression) {
         this.expression = expression;
